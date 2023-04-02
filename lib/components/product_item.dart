@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:project_state_store/models/products.model.dart';
+import 'package:project_state_store/utils/app_routes.dart';
 
 class ProductItem extends StatelessWidget {
   final Product product;
@@ -13,10 +12,11 @@ class ProductItem extends StatelessWidget {
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
           footer: GridTileBar(
-            backgroundColor: Colors.black54,
+            backgroundColor: Colors.black87,
             leading: IconButton(
               onPressed: () {},
               icon: const Icon(Icons.favorite),
+              color: Theme.of(context).colorScheme.secondary,
             ),
             title: Text(
               product.title,
@@ -25,11 +25,17 @@ class ProductItem extends StatelessWidget {
             trailing: IconButton(
               onPressed: () {},
               icon: const Icon(Icons.shopping_cart),
+              color: Theme.of(context).colorScheme.secondary,
             ),
           ),
-          child: Image.network(
-            product.imageUrl,
-            fit: BoxFit.cover,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.of(context).pushNamed(AppRoutes.PRODUCT_DETAIL,arguments: product);
+            },
+            child: Image.network(
+              product.imageUrl,
+              fit: BoxFit.cover,
+            ),
           )),
     );
   }
