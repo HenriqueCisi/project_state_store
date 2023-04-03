@@ -23,7 +23,6 @@ class _CounterPageState extends State<CounterPage> {
               onPressed: () {
                 setState(() {
                   provider?.inc();
-                  print(provider?.value);
                 });
               }),
           IconButton(
@@ -31,7 +30,6 @@ class _CounterPageState extends State<CounterPage> {
               onPressed: () {
                 setState(() {
                   provider?.dec();
-                  print(provider?.value);
                 });
               }),
         ],
