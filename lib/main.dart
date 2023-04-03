@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_state_store/models/cart.model.dart';
 import 'package:project_state_store/models/product_list.model.dart';
+import 'package:project_state_store/pages/cart.page.dart';
 import 'package:project_state_store/pages/product_detail.page.dart';
 import 'package:project_state_store/pages/products_overview.page.dart';
 import 'package:project_state_store/utils/app_routes.dart';
@@ -28,7 +29,8 @@ class MyApp extends StatelessWidget {
                 .copyWith(secondary: Colors.deepOrange)),
         home: const ProductsOverviewPage(),
         routes: {
-          AppRoutes.PRODUCT_DETAIL: (context) => const ProductDetailPage()
+          AppRoutes.PRODUCT_DETAIL: (context) => const ProductDetailPage(),
+          AppRoutes.CART: (context) => const CartPage()
         },
         debugShowCheckedModeBanner: false,
       ),

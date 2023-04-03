@@ -3,6 +3,7 @@ import 'package:project_state_store/components/product_grid.dart';
 import 'package:project_state_store/components/product_quantity.dart';
 import 'package:project_state_store/models/cart.model.dart';
 import 'package:project_state_store/models/product_list.model.dart';
+import 'package:project_state_store/utils/app_routes.dart';
 import 'package:provider/provider.dart';
 
 enum FilterOptions { favorite, all }
@@ -15,22 +16,20 @@ class ProductsOverviewPage extends StatefulWidget {
 }
 
 class _ProductsOverviewPageState extends State<ProductsOverviewPage> {
-    bool showFavoriteOnly = false;
+  bool showFavoriteOnly = false;
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(title: const Text('Minha Loja'), actions: [
         PopupMenuButton(
             icon: const Icon(Icons.more_vert),
-            onSelected: (value){
+            onSelected: (value) {
               setState(() {
-              if(value == FilterOptions.favorite){
-                showFavoriteOnly = true;
-              }
-              else{
-                showFavoriteOnly = false;
-              }
+                if (value == FilterOptions.favorite) {
+                  showFavoriteOnly = true;
+                } else {
+                  showFavoriteOnly = false;
+                }
               });
             },
             itemBuilder: (_) => [
@@ -40,10 +39,13 @@ class _ProductsOverviewPageState extends State<ProductsOverviewPage> {
                       value: FilterOptions.all, child: Text('Todos')),
                 ]),
         Consumer<Cart>(
-          builder: (ctx, cart,child) => ProductQuantity(
+          builder: (ctx, cart, child) => ProductQuantity(
               value: cart.itemsCount.toString(),
               child: IconButton(
-                  onPressed: () {}, icon: const Icon(Icons.shopping_cart))),
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(AppRoutes.CART);
+                  },
+                  icon: const Icon(Icons.shopping_cart))),
         )
       ]),
       body: ProductGrid(showFavoriteOnly),
