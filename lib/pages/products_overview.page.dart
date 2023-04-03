@@ -5,24 +5,31 @@ import 'package:provider/provider.dart';
 
 enum FilterOptions { favorite, all }
 
-class ProductsOverviewPage extends StatelessWidget {
+class ProductsOverviewPage extends StatefulWidget {
   const ProductsOverviewPage({super.key});
 
   @override
+  State<ProductsOverviewPage> createState() => _ProductsOverviewPageState();
+}
+
+class _ProductsOverviewPageState extends State<ProductsOverviewPage> {
+    bool showFavoriteOnly = false;
+  @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<ProductList>(context);
 
     return Scaffold(
       appBar: AppBar(title: const Text('Minha Loja'), actions: [
         PopupMenuButton(
             icon: const Icon(Icons.more_vert),
             onSelected: (value){
+              setState(() {
               if(value == FilterOptions.favorite){
-                provider.showFavoriteOnly();
+                showFavoriteOnly = true;
               }
               else{
-                 provider.showAll();
+                showFavoriteOnly = false;
               }
+              });
             },
             itemBuilder: (_) => [
                   const PopupMenuItem(
@@ -31,7 +38,7 @@ class ProductsOverviewPage extends StatelessWidget {
                       value: FilterOptions.all, child: Text('Todos')),
                 ])
       ]),
-      body: const ProductGrid(),
+      body: ProductGrid(showFavoriteOnly),
     );
   }
 }
