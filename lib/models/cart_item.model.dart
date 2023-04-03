@@ -1,4 +1,4 @@
-class CartItem {
+class CartItemModel {
 
 final String id;
 final String productId;
@@ -6,7 +6,7 @@ final String name;
 final int quantity;
 final double price;
 
-CartItem({
+CartItemModel({
   required this.id,
   required this.productId,
   required this.name,
