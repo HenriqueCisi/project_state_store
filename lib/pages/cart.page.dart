@@ -17,7 +17,10 @@ class CartPage extends StatelessWidget {
       appBar: AppBar(title: const Text('Carrinho')),
       body: Column(children: [
         Card(
-          margin: const EdgeInsets.all(25),
+          margin: const EdgeInsets.symmetric(
+            horizontal: 15,
+            vertical: 15
+          ),
           child: Padding(
             padding: const EdgeInsets.all(10),
             child: Row(
