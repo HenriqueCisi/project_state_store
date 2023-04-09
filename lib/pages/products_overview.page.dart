@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_state_store/components/app_drawer.dart';
 import 'package:project_state_store/components/product_grid.dart';
 import 'package:project_state_store/components/product_quantity.dart';
 import 'package:project_state_store/models/cart.model.dart';
@@ -49,6 +50,7 @@ class _ProductsOverviewPageState extends State<ProductsOverviewPage> {
         )
       ]),
       body: ProductGrid(showFavoriteOnly),
+      drawer: const AppDrawer()
     );
   }
 }

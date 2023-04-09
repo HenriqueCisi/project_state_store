@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:project_state_store/models/cart.model.dart';
-import 'package:project_state_store/models/order.dart';
 import 'package:project_state_store/models/order_list.dart';
 import 'package:project_state_store/models/product_list.model.dart';
 import 'package:project_state_store/pages/cart.page.dart';
+import 'package:project_state_store/pages/orders_page.dart';
 import 'package:project_state_store/pages/product_detail.page.dart';
 import 'package:project_state_store/pages/products_overview.page.dart';
 import 'package:project_state_store/utils/app_routes.dart';
@@ -30,10 +30,11 @@ class MyApp extends StatelessWidget {
             fontFamily: 'Lato',
             colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)
                 .copyWith(secondary: Colors.deepOrange)),
-        home: const ProductsOverviewPage(),
         routes: {
+          AppRoutes.HOME: (context) => const ProductsOverviewPage(),
           AppRoutes.PRODUCT_DETAIL: (context) => const ProductDetailPage(),
-          AppRoutes.CART: (context) => const CartPage()
+          AppRoutes.CART: (context) => const CartPage(),
+          AppRoutes.ORDERS: (context) => const OrdersPage(),
         },
         debugShowCheckedModeBanner: false,
       ),
