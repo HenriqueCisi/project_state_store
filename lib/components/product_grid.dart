@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_state_store/components/product_item.dart';
+import 'package:project_state_store/components/product_grid_item.dart';
 import 'package:project_state_store/models/product_list.model.dart';
 import 'package:project_state_store/models/products.model.dart';
 import 'package:provider/provider.dart';
@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 class ProductGrid extends StatelessWidget {
    final bool showFavoriteOnly;
 
-   ProductGrid(
+   const ProductGrid(
     this.showFavoriteOnly, {
     super.key,
   });
@@ -27,7 +27,8 @@ class ProductGrid extends StatelessWidget {
           mainAxisSpacing: 10),
       itemBuilder: (context, index) {
         return ChangeNotifierProvider.value(
-            value: loadedProducts[index], child: ProductItem());
+            // ignore: prefer_const_constructors
+            value: loadedProducts[index], child: ProductGridItem());
       },
       itemCount: loadedProducts.length,
     );

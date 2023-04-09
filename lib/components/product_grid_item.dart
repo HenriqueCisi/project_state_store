@@ -5,8 +5,8 @@ import 'package:provider/provider.dart';
 
 import '../models/cart.model.dart';
 
-class ProductItem extends StatelessWidget {
-  const ProductItem({super.key});
+class ProductGridItem extends StatelessWidget {
+  const ProductGridItem({super.key});
 
   @override
   Widget build(BuildContext context) {
