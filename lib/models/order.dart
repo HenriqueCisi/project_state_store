@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:project_state_store/models/cart_item.model.dart';
 
 class Order{
