@@ -11,6 +11,8 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final msg = ScaffoldMessenger.of(context);
+
     return ListTile(
       leading: CircleAvatar(backgroundImage: NetworkImage(product.imageUrl)),
       title: Text(product.name),
@@ -28,28 +30,36 @@ class ProductItem extends StatelessWidget {
               ),
               IconButton(
                   onPressed: () => showDialog(
-                      context: context,
-                      builder: (ctx) => AlertDialog(
-                            title: const Text('Tem certeza?'),
-                            content:
-                                const Text('Deseja remover o item do carrinho'),
-                            actions: [
-                              TextButton(
-                                  onPressed: () {
-                                     Navigator.of(context).pop();
-                                     Provider.of<ProductList>(context, listen: false).deleteProduct(product);
-                                  },
-                                  child: const Text('Sim')),
-                              TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: const Text('Não')),
-                            ],
-                          ))
-
-                 
-                  ,
+                          context: context,
+                          builder: (ctx) => AlertDialog(
+                                title: const Text('Tem certeza?'),
+                                content: const Text(
+                                    'Deseja remover o item do carrinho'),
+                                actions: [
+                                  TextButton(
+                                    child: const Text('Não'),
+                                    onPressed: () =>
+                                        Navigator.of(ctx).pop(false),
+                                  ),
+                                  TextButton(
+                                    child: const Text('Sim'),
+                                    onPressed: () =>
+                                        Navigator.of(ctx).pop(true),
+                                  ),
+                                ],
+                              )).then((value) async {
+                        if (value ?? false) {
+                          try{
+                              await Provider.of<ProductList>(
+                            context,
+                            listen: false,
+                          ).deleteProduct(product);
+                          }
+                          catch(error){
+                           msg.showSnackBar(SnackBar(content: Text(error.toString())));
+                          }
+                        }
+                      }),
                   icon: const Icon(Icons.delete),
                   color: Theme.of(context).colorScheme.error)
             ],
