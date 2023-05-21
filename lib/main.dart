@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
             fontFamily: 'Lato',
             colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)
-                .copyWith(secondary: Colors.deepOrange)),
+                .copyWith(secondary: const Color.fromARGB(255, 255, 255, 255))),
         routes: {
           AppRoutes.AUTH: (context) => const AuthPage(),
           AppRoutes.HOME: (context) => const ProductsOverviewPage(),
