@@ -42,7 +42,7 @@ class AuthPage extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 45,
                         fontFamily: 'Anton',
-                        color: Theme.of(context).colorScheme.secondary),
+                        color: Theme.of(context).colorScheme.tertiary),
                   ),
                 ),
                 const AuthForm()

@@ -9,7 +9,9 @@ import 'package:project_state_store/models/products.model.dart';
 import 'package:project_state_store/utils/constants.dart';
 
 class ProductList with ChangeNotifier {
-  final List<Product> _items = [];
+  String _token;
+  List<Product> _items = [];
+
   final _baseUrl = Constants.PRODUCT_BASE_URL;
 
   List<Product> get items => [..._items];
@@ -18,6 +20,8 @@ class ProductList with ChangeNotifier {
     return _items.where((element) => element.isFavorite).toList();
   }
 
+  ProductList(this._token, this._items);
+
   int get itemsCount {
     return _items.length;
   }
@@ -25,7 +29,7 @@ class ProductList with ChangeNotifier {
   Future<void> loadProducts() async {
     _items.clear();
 
-    final response = await http.get(Uri.parse('$_baseUrl.json'));
+    final response = await http.get(Uri.parse('$_baseUrl.json?auth=$_token'));
 
     if (response.body == 'null') {
       return;

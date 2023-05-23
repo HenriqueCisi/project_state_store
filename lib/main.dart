@@ -3,6 +3,7 @@ import 'package:project_state_store/models/auth.dart';
 import 'package:project_state_store/models/cart.model.dart';
 import 'package:project_state_store/models/order_list.dart';
 import 'package:project_state_store/models/product_list.model.dart';
+import 'package:project_state_store/pages/auth_or_home_page.dart';
 import 'package:project_state_store/pages/auth_page.dart';
 import 'package:project_state_store/pages/cart.page.dart';
 import 'package:project_state_store/pages/orders_page.dart';
@@ -24,20 +25,24 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => ProductList()),
+        ChangeNotifierProvider(create: (_) => Auth()),
+        ChangeNotifierProxyProvider<Auth, ProductList>(
+          create: (_) => ProductList('', []),
+          update: (ctx, auth, previous) {
+            return ProductList(auth.token ?? '', previous?.items ?? []);
+          },
+        ),
         ChangeNotifierProvider(create: (_) => Cart()),
-        ChangeNotifierProvider(create: (_) => OrderList()),
-        ChangeNotifierProvider(create: (_) => Auth())
+        ChangeNotifierProvider(create: (_) => OrderList())
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
             fontFamily: 'Lato',
             colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)
-                .copyWith(secondary: const Color.fromARGB(255, 255, 255, 255))),
+                .copyWith(secondary: Colors.deepOrange, tertiary: Colors.white)),
         routes: {
-          AppRoutes.AUTH: (context) => const AuthPage(),
-          AppRoutes.HOME: (context) => const ProductsOverviewPage(),
+          AppRoutes.AUTH_OR_HOME: (context) => const AuthOrHomepage(),
           AppRoutes.PRODUCT_DETAIL: (context) => const ProductDetailPage(),
           AppRoutes.CART: (context) => const CartPage(),
           AppRoutes.ORDERS: (context) => const OrdersPage(),
