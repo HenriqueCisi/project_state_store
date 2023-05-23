@@ -13,7 +13,7 @@ class Product with ChangeNotifier{
   final String imageUrl;
   bool isFavorite;
 
-  final _baseUrl = Constants.PRODUCT_BASE_URL;
+  final _baseUrl = Constants.USER_FAVORITE_URL;
 
   Product(
       {required this.id,
@@ -24,14 +24,14 @@ class Product with ChangeNotifier{
       this.isFavorite = false}
   );
 
-  Future<void> toogleFavorite(String product, String token) async {
+  Future<void> toogleFavorite(
+      String product, String token, String userId) async {
     isFavorite = !isFavorite;
     notifyListeners();
 
-    final response = await http.patch(Uri.parse('$_baseUrl/$product.json?auth=$token'),
-        body: jsonEncode({
-          "isFavorite": isFavorite,
-        }));
+    final response =
+        await http.put(Uri.parse('$_baseUrl/$userId/$product.json?auth=$token'),
+            body: jsonEncode(isFavorite));
 
     if (response.statusCode >= 400) {
       isFavorite = !isFavorite;
