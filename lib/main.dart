@@ -4,13 +4,11 @@ import 'package:project_state_store/models/cart.model.dart';
 import 'package:project_state_store/models/order_list.dart';
 import 'package:project_state_store/models/product_list.model.dart';
 import 'package:project_state_store/pages/auth_or_home_page.dart';
-import 'package:project_state_store/pages/auth_page.dart';
 import 'package:project_state_store/pages/cart.page.dart';
 import 'package:project_state_store/pages/orders_page.dart';
 import 'package:project_state_store/pages/product_detail.page.dart';
 import 'package:project_state_store/pages/product_form_page.dart';
 import 'package:project_state_store/pages/products_page.dart';
-import 'package:project_state_store/pages/products_overview.page.dart';
 import 'package:project_state_store/utils/app_routes.dart';
 import 'package:provider/provider.dart';
 
@@ -32,15 +30,21 @@ class MyApp extends StatelessWidget {
             return ProductList(auth.token ?? '', previous?.items ?? []);
           },
         ),
+        ChangeNotifierProxyProvider<Auth, OrderList>(
+          create: (_) => OrderList('', []),
+          update: (ctx, auth, previous) {
+            return OrderList(auth.token ?? '', previous?.items ?? []);
+          },
+        ),
         ChangeNotifierProvider(create: (_) => Cart()),
-        ChangeNotifierProvider(create: (_) => OrderList())
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
             fontFamily: 'Lato',
             colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)
-                .copyWith(secondary: Colors.deepOrange, tertiary: Colors.white)),
+                .copyWith(
+                    secondary: Colors.deepOrange, tertiary: Colors.white)),
         routes: {
           AppRoutes.AUTH_OR_HOME: (context) => const AuthOrHomepage(),
           AppRoutes.PRODUCT_DETAIL: (context) => const ProductDetailPage(),
