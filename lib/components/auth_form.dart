@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names, prefer_final_fields
+
 import 'package:flutter/material.dart';
 import 'package:project_state_store/exceptions/auth_exception.dart';
 import 'package:project_state_store/models/auth.dart';
@@ -159,7 +161,7 @@ class _AuthFormState extends State<AuthForm> {
                                 horizontal: 30, vertical: 8)),
                         onPressed: _submitForm,
                         child: Text(isLogin() ? 'ENTRAR' : 'REGISTRAR')),
-                Spacer(),
+                const Spacer(),
                 TextButton(
                     onPressed: () => _switchAuthMode(),
                     child: Text(
